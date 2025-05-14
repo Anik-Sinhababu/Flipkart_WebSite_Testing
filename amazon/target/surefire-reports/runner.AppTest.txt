@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: runner.AppTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 18.252 s <<< FAILURE! - in runner.AppTest
+testCase1(runner.AppTest)  Time elapsed: 0.021 s  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentReports.createTest(String)" because "this.reports" is null
+	at runner.AppTest.testCase1(AppTest.java:30)
+
+flush(runner.AppTest)  Time elapsed: 0.451 s  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentReports.flush()" because "this.reports" is null
+	at runner.AppTest.flush(AppTest.java:42)
+
