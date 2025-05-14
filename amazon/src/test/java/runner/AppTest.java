@@ -27,7 +27,7 @@ public class AppTest extends Base {
 
     @Test
     public void testCase1() {
-        test = reports.createTest("Test Case 1");
+        
     }
 
     @AfterMethod
