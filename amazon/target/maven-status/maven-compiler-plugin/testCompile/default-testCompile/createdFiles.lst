@@ -1,8 +1,11 @@
 runner\AppTest.class
 utils\LoggerHandler.class
+uistore\LoginLocator.class
 utils\Base.class
 utils\Reporter.class
+pages\LoginPageAction.class
 utils\Prop.class
 utils\ExcelFile.class
 utils\ScreenShots.class
+utils\DataProviders.class
 utils\WebDriverHelper.class
