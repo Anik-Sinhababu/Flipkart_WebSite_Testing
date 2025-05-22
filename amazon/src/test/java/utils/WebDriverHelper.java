@@ -1,5 +1,4 @@
 package utils;
- 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,36 +9,45 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.ExtentTest;
+
 import runner.AppTest;
  
 public class WebDriverHelper extends Base {
  
 	LoggerHandler logger = new LoggerHandler();
 	Reporter report = new Reporter();
-	ExcelFile excelfile=new ExcelFile();
+	ExcelFile excelfile = new ExcelFile("");
+	public ExtentTest test;
+
+	public WebDriverHelper(ExtentTest test)
+	{
+		this.test = test;
+	}
+
  
 	public void clickElement(By locator, String message, String description, String eMessage) {
 		try {
 			WebElement element = driver.findElement(locator);
 			element.click();
 			logger.logInfo(message);
-			report.attachScreenshotToReport(message, AppTest.test, description);
+			report.attachScreenshotToReport(message, test, description);
 		} catch (Exception e) {
 			logger.logError(eMessage);
-			report.attachFailedScreenshotToReport(eMessage, AppTest.test, description);
+			report.attachFailedScreenshotToReport(eMessage, test, description);
 			System.out.println(e.getMessage());
 		}
 	}
  
-	public void sendKeys(By locator, String key, String message, String description, String eMessage) {
+	public void sendKeys(By locator,String message, String description, String eMessage, String value) {
 		try {
 			WebElement element = driver.findElement(locator);
-			element.sendKeys(excelfile.getCellValue(key));
+			element.sendKeys(value);
 			logger.logInfo(message);
-			report.attachScreenshotToReport(message, AppTest.test, description);
+			report.attachScreenshotToReport(message, test, description);
 		} catch (Exception e) {
 			logger.logError(eMessage);
-			report.attachFailedScreenshotToReport(eMessage, AppTest.test, description);
+			report.attachFailedScreenshotToReport(eMessage, test, description);
 			System.out.println(e.getMessage());
 		}
 	}
@@ -69,10 +77,10 @@ public class WebDriverHelper extends Base {
 			Actions actions = new Actions(driver);
 			actions.moveToElement(element).perform();
 			logger.logInfo(message);
-			report.attachScreenshotToReport(message, AppTest.test, description);
+			report.attachScreenshotToReport(message, test, description);
 		} catch (Exception e) {
 			logger.logError(eMessage);
-			report.attachFailedScreenshotToReport(eMessage, AppTest.test, description);
+			report.attachFailedScreenshotToReport(eMessage, test, description);
 			System.out.println(e.getMessage());
 		}
 	}
@@ -85,7 +93,7 @@ public class WebDriverHelper extends Base {
 			logger.logInfo(message);
 		} catch (Exception e) {
 			logger.logError(eMessage);
-			report.attachFailedScreenshotToReport(eMessage, AppTest.test, description);
+			report.attachFailedScreenshotToReport(eMessage, test, description);
 			System.out.println(e.getMessage());
 		}
 	}
@@ -99,19 +107,18 @@ public class WebDriverHelper extends Base {
 		}
 	}
 	
-	public void verify(By locator,String key, String message, String description, String eMessage) {
+	public void verify(By locator, String message, String description, String eMessage, String expectedvalue) {
 		try {
-			assert(excelfile.getCellValue(key).equals(getText(locator)));
+			assert(expectedvalue.equals(getText(locator)));
 			logger.logInfo(message);
-			report.attachScreenshotToReport(message, AppTest.test, description);
+			report.attachScreenshotToReport(message, test, description);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}catch(AssertionError ae) {
 			logger.logError(eMessage);
-			report.attachFailedScreenshotToReport(eMessage, AppTest.test, description);
+			report.attachFailedScreenshotToReport(eMessage, test, description);
 			System.out.println(ae.getMessage());
 		}
 	}
- 
 }
  
